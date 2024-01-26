@@ -1,7 +1,7 @@
 // UniversalLoginConfig.js
 function createLoginUI(universal_login_config) {
     const container = document.createElement('div');
-    container.className = 'login-container';
+    container.className = 'container login-container';
 
     // Create the logo
     const logo = document.createElement('img');
@@ -94,10 +94,114 @@ function createLoginUI(universal_login_config) {
 
         container.appendChild(federatedForm);
     });
+
+    const body = document.body;
+    body.appendChild(container);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     if (window.universal_login_config) {
         createLoginUI(window.universal_login_config);
+    }
+    else {
+        const universal_login_config = {
+            "application": {
+                "id": "lFt4u93pZK5stEBT9Dt1rhxQuq286mgL",
+                "name": "RWA",
+                "metadata": {
+                    "_uf_bundle_urls": "https://cdn.jsdelivr.net/gh/pushpabrol/images/main.76178d91.js",
+                    "_uf_screens": "login,login-id",
+                    "_uf_style_urls": "https://cdn.jsdelivr.net/gh/pushpabrol/images/main.ac030291.css"
+                }
+            },
+            "branding": {
+                "logo_url": "https://logo.clearbit.com/cmegroup.com"
+            },
+            "tenant": {
+                "friendly_name": "CME Group",
+                "support_email": "",
+                "support_url": ""
+            },
+            "locale": "en",
+            "prompt": {
+                "name": "login",
+                "screen": {
+                    "name": "login",
+                    "texts": {
+                        "pageTitle": "Log in | RWA",
+                        "title": "Welcome",
+                        "description": "Log in to CME Group to continue to RWA.",
+                        "separatorText": "Or",
+                        "buttonText": "Continue",
+                        "footerLinkText": "Sign up",
+                        "signupActionLinkText": "Sign up",
+                        "footerText": "Don't have an account?",
+                        "signupActionText": "Don't have an account?",
+                        "forgotPasswordText": "Forgot password?",
+                        "passwordPlaceholder": "Password",
+                        "usernamePlaceholder": "Username or email address",
+                        "emailPlaceholder": "Email address",
+                        "phonePlaceholder": "Phone number",
+                        "usernameOnlyPlaceholder": "Username",
+                        "phoneOrUsernameOrEmailPlaceholder": "Phone or Username or Email",
+                        "phoneOrEmailPlaceholder": "Phone number or Email address",
+                        "phoneOrUsernamePlaceholder": "Phone Number or Username",
+                        "usernameOrEmailPlaceholder": "Username or Email address",
+                        "editEmailText": "Edit",
+                        "alertListTitle": "Alerts",
+                        "invitationTitle": "You've Been Invited!",
+                        "invitationDescription": "Log in to accept 's invitation to join CME Group on RWA.",
+                        "logoAltText": "CME Group",
+                        "showPasswordText": "Show password",
+                        "hidePasswordText": "Hide password"
+                    }
+                }
+            },
+            "transaction": {
+                "state": "hKFo2SBLcGl0V2NhSGJwOFY3dXAxOVF4aFJHc1RmT1J1eU5jLaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHdzbWJpdUtITGNRN2FybG1iblpfRFdnSWM1ZU5BUlJUo2NpZNkgbEZ0NHU5M3BaSzVzdEVCVDlEdDFyaHhRdXEyODZtZ0w",
+                "captcha": null,
+                "database_connection": {
+                    "id": "con_8TG7T51J4RMgdpMB",
+                    "name": "Username-Password-Authentication",
+                    "signup_enabled": true,
+                    "signup_path": "/u/signup?state=hKFo2SBLcGl0V2NhSGJwOFY3dXAxOVF4aFJHc1RmT1J1eU5jLaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHdzbWJpdUtITGNRN2FybG1iblpfRFdnSWM1ZU5BUlJUo2NpZNkgbEZ0NHU5M3BaSzVzdEVCVDlEdDFyaHhRdXEyODZtZ0w",
+                    "forgot_password_enabled": true,
+                    "forgot_password_path": "/u/login/password-reset-start/Username-Password-Authentication?state=hKFo2SBLcGl0V2NhSGJwOFY3dXAxOVF4aFJHc1RmT1J1eU5jLaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHdzbWJpdUtITGNRN2FybG1iblpfRFdnSWM1ZU5BUlJUo2NpZNkgbEZ0NHU5M3BaSzVzdEVCVDlEdDFyaHhRdXEyODZtZ0w"
+                },
+                "federated_connections": [
+                    {
+                        "name": "google-oauth2",
+                        "strategy": "google",
+                        "friendly_name": "Google"
+                    }
+                ],
+                "organizations": false,
+                "request": {
+                    "ip": "47.197.132.2",
+                    "country": {
+                        "name": "United States",
+                        "code": "US",
+                        "prefix": "1"
+                    }
+                },
+                "errors": null,
+                "params": {
+                    "acr_values": [],
+                    "login_hint": null,
+                    "prompt": [],
+                    "redirect_uri": "https://jwt.io",
+                    "requested_scopes": [
+                        "openid"
+                    ],
+                    "response_mode": null,
+                    "response_type": [
+                        "id_token"
+                    ],
+                    "state": "643490",
+                    "ui_locales": []
+                }
+            }
+        }
+        createLoginUI(universal_login_config);
     }
 });

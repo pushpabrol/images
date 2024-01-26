@@ -1,61 +1,102 @@
-function createLoginUI(config) {
-    // Create main container
-    const container = document.createElement('div');
-    container.className = 'login-container';
+// UniversalLoginConfig.js
+function createLoginUI(universal_login_config) {
+    const body = document.body;
 
-    // Add logo if exists
-    if (config.branding && config.branding.logo_url) {
-        const logo = document.createElement('img');
-        logo.src = config.branding.logo_url;
-        logo.className = 'brand-logo';
-        logo.alt = 'Logo';
-        container.appendChild(logo);
-    }
+    // Create the logo
+    const logo = document.createElement('img');
+    logo.src = universal_login_config.branding.logo_url;
+    logo.alt = universal_login_config.prompt.screen.texts.logoAltText;
+    body.appendChild(logo);
 
-    // Add title
+    // Create the title
     const title = document.createElement('h1');
-    title.textContent = config.prompt.screen.texts.title || 'Login';
-    container.appendChild(title);
+    title.textContent = universal_login_config.prompt.screen.texts.title;
+    body.appendChild(title);
 
-    // Add description
+    // Create the description
     const description = document.createElement('p');
-    description.textContent = config.prompt.screen.texts.description;
-    container.appendChild(description);
+    description.textContent = universal_login_config.prompt.screen.texts.description;
+    body.appendChild(description);
 
-    // Add form
+    // Create the main login form
     const form = document.createElement('form');
-    // Add other form fields here
-    const inputUsername = document.createElement('input');
-    inputUsername.type = 'text';
-    inputUsername.placeholder = config.prompt.screen.texts.usernamePlaceholder;
-    form.appendChild(inputUsername);
+    form.method = 'POST';
+    form.action = `/u/${universal_login_config.prompt.name}?state=${universal_login_config.transaction.state}`;
 
-    const inputPassword = document.createElement('input');
-    inputPassword.type = 'password';
-    inputPassword.placeholder = config.prompt.screen.texts.passwordPlaceholder;
-    form.appendChild(inputPassword);
+    // Username or Email Field
+    const usernameInput = document.createElement('input');
+    usernameInput.setAttribute('type', 'text');
+    usernameInput.setAttribute('name', 'username');
+    usernameInput.setAttribute('placeholder', universal_login_config.prompt.screen.texts.usernamePlaceholder);
+    form.appendChild(usernameInput);
 
+    // Password Field
+    const passwordInput = document.createElement('input');
+    passwordInput.setAttribute('type', 'password');
+    passwordInput.setAttribute('name', 'password');
+    passwordInput.setAttribute('placeholder', universal_login_config.prompt.screen.texts.passwordPlaceholder);
+    form.appendChild(passwordInput);
+
+    // hidden state
+    const hiddenStateInput = document.createElement('input');
+    hiddenStateInput.setAttribute('type', 'hidden');
+    hiddenStateInput.setAttribute('name', 'state');
+    hiddenStateInput.value = universal_login_config.transaction.state;
+    form.appendChild(hiddenStateInput);
+
+    // Submit Button
     const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = config.prompt.screen.texts.buttonText;
+    submitButton.textContent = universal_login_config.prompt.screen.texts.buttonText;
     form.appendChild(submitButton);
 
-    container.appendChild(form);
+    body.appendChild(form);
 
-    // Add sign-up link if enabled
-    if (config.transaction.database_connection.signup_enabled) {
-        const signupLink = document.createElement('div');
-        signupLink.id = 'signup-link';
-        const link = document.createElement('a');
-        link.href = config.transaction.database_connection.signup_path;
-        link.textContent = config.prompt.screen.texts.signupActionLinkText;
-        signupLink.appendChild(link);
-        container.appendChild(signupLink);
-    }
+        // Signup Link
+        if (universal_login_config.transaction.database_connection.signup_enabled) {
+            const signupLink = document.createElement('a');
+            signupLink.href = universal_login_config.transaction.database_connection.signup_path;
+            signupLink.textContent = universal_login_config.prompt.screen.texts.signupActionLinkText;
+            body.appendChild(signupLink);
+        }
+    
+        // Forgot Password Link
+        if (universal_login_config.transaction.database_connection.forgot_password_enabled) {
+            const forgotPasswordLink = document.createElement('a');
+            forgotPasswordLink.href = universal_login_config.transaction.database_connection.forgot_password_path;
+            forgotPasswordLink.textContent = universal_login_config.prompt.screen.texts.forgotPasswordText;
+            body.appendChild(forgotPasswordLink);
+    
+        }
+    
 
-    // Append the container to the body or any other desired parent element
-    document.body.appendChild(container);
+    // Federated Connections
+    universal_login_config.transaction.federated_connections.forEach(connection => {
+        const federatedForm = document.createElement('form');
+        federatedForm.method = 'POST';
+        federatedForm.action = '/login';
+
+        const hiddenConnectionInput = document.createElement('input');
+        hiddenConnectionInput.setAttribute('type', 'hidden');
+        hiddenConnectionInput.setAttribute('name', 'connection');
+        hiddenConnectionInput.value = connection.name;
+        federatedForm.appendChild(hiddenConnectionInput);
+
+        const hiddenStateInput = document.createElement('input');
+        hiddenStateInput.setAttribute('type', 'hidden');
+        hiddenStateInput.setAttribute('name', 'state');
+        hiddenStateInput.value = universal_login_config.transaction.state;
+        federatedForm.appendChild(hiddenStateInput);
+
+        const federatedButton = document.createElement('button');
+        federatedButton.textContent = connection.friendly_name;
+        federatedForm.appendChild(federatedButton);
+
+        body.appendChild(federatedForm);
+    });
 }
 
-// Assuming universal_login_config is available globally
-createLoginUI(universal_login_config);
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.universal_login_config) {
+        createLoginUI(window.universal_login_config);
+    }
+});

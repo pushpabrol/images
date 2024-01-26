@@ -1,22 +1,23 @@
 // UniversalLoginConfig.js
 function createLoginUI(universal_login_config) {
-    const body = document.body;
+    const container = document.createElement('div');
+    container.className = 'login-container';
 
     // Create the logo
     const logo = document.createElement('img');
     logo.src = universal_login_config.branding.logo_url;
     logo.alt = universal_login_config.prompt.screen.texts.logoAltText;
-    body.appendChild(logo);
+    container.appendChild(logo);
 
     // Create the title
     const title = document.createElement('h1');
     title.textContent = universal_login_config.prompt.screen.texts.title;
-    body.appendChild(title);
+    container.appendChild(title);
 
     // Create the description
     const description = document.createElement('p');
     description.textContent = universal_login_config.prompt.screen.texts.description;
-    body.appendChild(description);
+    container.appendChild(description);
 
     // Create the main login form
     const form = document.createElement('form');
@@ -49,14 +50,14 @@ function createLoginUI(universal_login_config) {
     submitButton.textContent = universal_login_config.prompt.screen.texts.buttonText;
     form.appendChild(submitButton);
 
-    body.appendChild(form);
+    container.appendChild(form);
 
         // Signup Link
         if (universal_login_config.transaction.database_connection.signup_enabled) {
             const signupLink = document.createElement('a');
             signupLink.href = universal_login_config.transaction.database_connection.signup_path;
             signupLink.textContent = universal_login_config.prompt.screen.texts.signupActionLinkText;
-            body.appendChild(signupLink);
+            container.appendChild(signupLink);
         }
     
         // Forgot Password Link
@@ -64,7 +65,7 @@ function createLoginUI(universal_login_config) {
             const forgotPasswordLink = document.createElement('a');
             forgotPasswordLink.href = universal_login_config.transaction.database_connection.forgot_password_path;
             forgotPasswordLink.textContent = universal_login_config.prompt.screen.texts.forgotPasswordText;
-            body.appendChild(forgotPasswordLink);
+            container.appendChild(forgotPasswordLink);
     
         }
     
@@ -91,7 +92,7 @@ function createLoginUI(universal_login_config) {
         federatedButton.textContent = connection.friendly_name;
         federatedForm.appendChild(federatedButton);
 
-        body.appendChild(federatedForm);
+        container.appendChild(federatedForm);
     });
 }
 

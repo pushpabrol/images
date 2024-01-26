@@ -1,85 +1,82 @@
-/* Reset some basic elements */
-body, h1, p, form {
-    margin: 0;
-    padding: 0;
-}
-
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f0f0f0;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-.login-container {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    padding: 20px;
 }
 
-.brand-logo {
-    max-width: 100px;
-    margin: 0 auto 20px;
+/* Logo */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
+/* Title */
 h1 {
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin: 10px 0;
 }
 
+/* Description */
 p {
-    font-size: 1rem;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin: 0;
+    color: #333;
 }
 
-form input[type="text"],
-form input[type="password"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
 }
 
-form button[type="submit"] {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    background-color: #0056b3;
-    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-form button[type="submit"]:hover {
-    background-color: #004494;
+button:hover {
+    background-color: #0056b3;
 }
 
-#signup-link {
-    margin-top: 20px;
-}
-
-#signup-link a {
-    color: #0056b3;
+/* Links */
+a {
     text-decoration: none;
-    font-size: 0.9rem;
+    color: #007BFF;
+    margin: 5px;
 }
 
-#signup-link a:hover {
+a:hover {
     text-decoration: underline;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    .login-container {
-        width: 90%;
-    }
 }
